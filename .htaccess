@@ -1,0 +1,16 @@
+### PROTECT FILES ###
+<FilesMatch "\.(htaccess|htpasswd|ini|fla|psd|log|sh)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# Włącz przetwarzanie plików .htaccess
+RewriteEngine On
+
+RewriteRule ^phpConnect\.php$ /master_web/index [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ /master_web/$1.php [L]
+
+ErrorDocument 404 /master_web/404.html
